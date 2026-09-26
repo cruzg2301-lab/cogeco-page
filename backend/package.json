@@ -1,14 +1,11 @@
 {
-  "name": "cogeco-webmail-backend",
+  "name": "backend",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "node-fetch": "^3.3.2",
-    "cors": "^2.8.5"
-  },
-  "type": "module"
+    "express": "^4.18.2"
+  }
 }
